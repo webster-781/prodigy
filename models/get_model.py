@@ -11,7 +11,7 @@ import wandb
 import sys
 import os
 
-sys.path.extend(os.path.join(os.path.dirname(__file__), "../"))
+# sys.path.extend(os.path.join(os.path.dirname(__file__), "../"))
 
 from models.gnn_with_edge_attr import gnn_models
 from models.multilayer_gnn import MultiLayerGNN

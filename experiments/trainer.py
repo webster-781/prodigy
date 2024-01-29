@@ -8,7 +8,7 @@ import time
 from tqdm import tqdm, trange
 import shutil
 
-sys.path.extend(os.path.join(os.path.dirname(__file__), "../../"))
+# sys.path.extend(os.path.join(os.path.dirname(__file__), "../../"))
 
 from models.get_model import print_num_trainable_params
 from models.model_eval_utils import accuracy
@@ -20,7 +20,7 @@ from experiments.layers import get_module_list
 
 class TrainerFS():
     def __init__(self, dataset, parameter):
-        wandb.init(project="graph-clip", name=parameter["exp_name"])
+        wandb.init(project="task-agnostic-kd-gnns", name=parameter["exp_name"])
         #wandb.run.log_code(".")
         wandb.run.summary["wandb_url"] = wandb.run.url
         print("---------Parameters---------")
@@ -113,6 +113,7 @@ class TrainerFS():
             layer_list = torch.nn.ModuleList(layer_list)
             self.model = SingleLayerGeneralGNN(layer_list=layer_list, initial_label_mlp=initial_label_mlp,  # initial_input_mlp = initial_input_mlp,
                                                  params=self.parameter, text_dropout=self.txt_dropout)
+            breakpoint()
         else:
             self.model = SimpleDotProdModel(layer_list=None, initial_label_mlp=initial_label_mlp,
                                             params=self.parameter, text_dropout=self.txt_dropout)

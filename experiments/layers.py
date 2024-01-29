@@ -2,7 +2,7 @@ import sys
 import os
 
 
-sys.path.extend(os.path.join(os.path.dirname(__file__), "../../"))
+# sys.path.extend(os.path.join(os.path.dirname(__file__), "../../"))
 
 
 from models.metaGNN import MetaGNN, MetaTransformer, MetaTransformerPytorch, MetaAverage
@@ -55,7 +55,7 @@ def get_module_list(module_string, emb_dim, edge_attr_dim, input_dim, dropout, r
                           batch_norm=batch_norm_encoder)
                 )
         elif layer[0] == "G":
-            # GraphSAGE background graph layer:
+            # GAT background graph layer:
             # e. g. S = 1-layer GraphSAGE
             # e. g. S2 = 2-layer GraphSAGE
             n_layer = 1

@@ -5,13 +5,19 @@ import torch
 torch.multiprocessing.set_sharing_strategy("file_system") 
 
 import sys
+sys_path_vals = ['/DATATWO/users/ayush/prodigy/experiments', '/DATATWO/users/ayush/minconda3/envs/prodigyenv/lib/python310.zip', '/DATATWO/users/ayush/minconda3/envs/prodigyenv/lib/python3.10', '/DATATWO/users/ayush/minconda3/envs/prodigyenv/lib/python3.10/lib-dynload', '/DATATWO/users/ayush/minconda3/envs/prodigyenv/lib/python3.10/site-packages', '/DATATWO/users/ayush/prodigy', '/DATATWO/users/ayush/prodigy/data', '/DATATWO/users/ayush/prodigy/models']
+for path in sys.path:
+    if path not in sys_path_vals:
+        sys.path.remove(path)
+sys.path.append('/DATATWO/users/ayush/prodigy')
+sys.path.append('/DATATWO/users/ayush/prodigy/data')
+sys.path.append('/DATATWO/users/ayush/prodigy/models')
+print(sys.path)
 import os
 torch.autograd.set_detect_anomaly(True)
 
-sys.path.extend(os.path.join(os.path.dirname(__file__), "../../"))
-
-from experiments.params import get_params
-from experiments.trainer import TrainerFS
+from params import get_params
+from trainer import TrainerFS
 
 from data.data_loader_wrapper import get_dataset_wrap
 

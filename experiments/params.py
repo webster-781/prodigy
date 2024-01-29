@@ -4,7 +4,7 @@ import argparse
 import sys
 import os
 from datetime import datetime
-sys.path.extend(os.path.join(os.path.dirname(__file__), "../../"))
+# sys.path.extend(os.path.join(os.path.dirname(__file__), "../../"))
 
 
 def get_params():

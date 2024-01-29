@@ -4,11 +4,15 @@ import numpy as np
 import torch
 from torch.utils.data import DataLoader
 from ogb.nodeproppred import PygNodePropPredDataset
-from .process_arxiv_categories import arxiv_cs_taxonomy
+import sys
+from pathlib import Path
+# sys.path += [str(Path(__file__).parent.parent)]
+print(sys.path)
+from process_arxiv_categories import arxiv_cs_taxonomy
 from experiments.sampler import NeighborSampler
-from .dataset import SubgraphDataset
-from .dataloader import MulticlassTask, ParamSampler, BatchSampler, Collator
-from .augment import get_aug
+from dataset import SubgraphDataset
+from dataloader import MulticlassTask, ParamSampler, BatchSampler, Collator
+from augment import get_aug
 
 
 def get_arxiv_dataset(root, n_hop=2, bert=None, bert_device="cpu", **kwargs):
@@ -144,12 +148,12 @@ if __name__ == "__main__":
 
 
     from models.sentence_embedding import SentenceEmb
-    bert = SentenceEmb("multi-qa-distilbert-cos-v1", device="cuda")
+    bert = SentenceEmb("multi-qa-distilbert-cos-v1", device="cuda", cache_folder="/DATATWO/users/ayush/")
 
-    dataloader_var = get_arxiv_dataloader(dataset, "train", batch_size=5, n_way=range(3, 6), n_shot=range(3, 6), n_query=range(10, 24), batch_count=2000, root=root, bert=bert, num_workers=10)
+    dataloader_var = get_arxiv_dataloader(dataset=dataset, split="train", node_split="", batch_size=5, n_way=range(3, 6), n_shot=range(3, 6), n_query=range(10, 24), batch_count=2000, root=root, bert=bert, num_workers=10, aug= None, aug_test = False, split_labels=True, label_set = range(40), linear_probe=False, train_cap=3)
     for i in tqdm(dataloader_var):
         pass
 
-    dataloader = get_arxiv_dataloader(dataset, "train", batch_size=5, n_way=3, n_shot=3, n_query=24, batch_count=2000, root=root, bert=bert, num_workers=10)
+    dataloader = get_arxiv_dataloader(dataset=dataset, split="train", node_split="", batch_size=5, n_way=3, n_shot=3, n_query=24, batch_count=2000, root=root, bert=bert, num_workers=10, aug= None, aug_test = False, split_labels=True, label_set = range(40), linear_probe=False, train_cap=3)
     for i in tqdm(dataloader):
         pass

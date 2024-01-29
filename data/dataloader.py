@@ -8,7 +8,7 @@ from torch.nn.utils.rnn import pad_sequence
 from torch_geometric.data import Batch
 from itertools import chain
 import random
-from .augment import Identity
+from augment import Identity
 import math
 
 class TaskBase:

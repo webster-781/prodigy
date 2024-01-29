@@ -79,6 +79,7 @@ class SingleLayerGeneralGNN(torch.nn.Module):
         :return: y_true_matrix, y_pred_matrix (for the query set only!)
         '''
         supernode_idx = graph.supernode + graph.ptr[:-1]
+        breakpoint()
         #center_nodes = torch.zeros([graph.x.shape[0], 1]).to(graph.x.device)
         #center_nodes[graph.ptr[:-1]] = 1
         #graph.x = self.initial_input_mlp(torch.concat([graph.x, center_nodes], dim = 1))

@@ -5,13 +5,17 @@ import copy
 import numpy as np
 import torch
 import time
+import sys
+from pathlib import Path
+# sys.path += [str(Path(__file__).parent.parent)]
+print(sys.path)
 from torch.utils.data import DataLoader
 from torch_geometric.data import Data
 from experiments.sampler import NeighborSamplerCacheAdj
 from ogb.lsc import MAG240MDataset
-from .dataset import SubgraphDataset
-from .dataloader import NeighborTask, MultiTaskSplitWay, MultiTaskSplitBatch, MulticlassTask, ParamSampler, BatchSampler, Collator, ContrastiveTask
-from .augment import get_aug
+from dataset import SubgraphDataset
+from dataloader import NeighborTask, MultiTaskSplitWay, MultiTaskSplitBatch, MulticlassTask, ParamSampler, BatchSampler, Collator, ContrastiveTask
+from augment import get_aug
 
 class MAG240MSubgraphDataset(SubgraphDataset):
     def get_subgraph(self, *args, **kwargs):
